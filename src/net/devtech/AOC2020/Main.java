@@ -92,7 +92,9 @@ public class Main extends JPanel {
 					this.output.setText(solution);
 				} catch (IllegalStateException ex) {
 					JOptionPane.showMessageDialog(null, ex.getMessage());
-				} catch (Throwable ignored) {}
+				} catch (Throwable t) {
+					t.printStackTrace();
+				}
 
 				FRAME.setTitle("Elapsed Time:" + clock.getElapsed()/1_000_000d + "ms");
 			});

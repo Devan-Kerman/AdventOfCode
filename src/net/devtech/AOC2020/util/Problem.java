@@ -25,5 +25,23 @@ public interface Problem {
 		String solve(Clock clock, String[] input);
 	}
 
+	interface CharArray extends Problem {
+		@Override
+		default String solve(Clock clock, String input) {
+			String[] str = input.split("\n");
+			char[][] chars = new char[str.length][];
+			for (int i = 0; i < str.length; i++) {
+				chars[i] = str[i].toCharArray();
+			}
+
+			return this.solve(clock, chars);
+		}
+
+		/**
+		 * @param input input[y][x]
+		 */
+		String solve(Clock clock, char[][] input);
+	}
+
 	String solve(Clock clock, String input);
 }

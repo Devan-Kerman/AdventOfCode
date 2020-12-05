@@ -11,6 +11,8 @@ import net.devtech.AOC2020.problems.day3.TobboganSlopeMulti;
 import net.devtech.AOC2020.problems.day3.TobboganSlopeThree;
 import net.devtech.AOC2020.problems.day4.CountExtraValidPassports;
 import net.devtech.AOC2020.problems.day4.CountValidPassports;
+import net.devtech.AOC2020.problems.day5.FindSeat;
+import net.devtech.AOC2020.problems.day5.ValidateSeats;
 
 public interface Problems {
 	Map<IntPair, Problem> REGISTRY = new HashMap<>();
@@ -22,6 +24,8 @@ public interface Problems {
 	Problem TOBBOGAN_MULTI_SLOPE = register(3, 2, new TobboganSlopeMulti());
 	Problem COUNT_VALID_PASSPORTS = register(4, 1, new CountValidPassports());
 	Problem COUNT_EXRA_VALID_PASSPORTS = register(4, 2, new CountExtraValidPassports());
+	Problem VALIDATE_SEATS = register(5, 1, new ValidateSeats());
+	Problem FIND_SEAT = register(5, 2, new FindSeat());
 
 	static Problem register(int day, int part, Problem problem) {
 		REGISTRY.put(new IntPair(day, part), problem);

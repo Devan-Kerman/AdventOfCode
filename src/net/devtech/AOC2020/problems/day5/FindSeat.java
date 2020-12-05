@@ -20,12 +20,13 @@ public class FindSeat implements Problem.StringArray {
 			data[seatId >> 5] |= 1 << (seatId & 31);
 		}
 
-		clock.stop();
+
 		boolean lastFlag = false, lastLastFlag = false;
 		int lastId = 0;
 		for (int i = 0; i < 1024; i++) {
 			int flag = data[i >> 5] & 1 << (i & 31);
 			if(lastLastFlag && !lastFlag && flag != 0) {
+				clock.stop();
 				return Integer.toString(lastId);
 			}
 
@@ -34,6 +35,8 @@ public class FindSeat implements Problem.StringArray {
 			lastFlag = flag != 0;
 			lastId = i;
 		}
+
+		clock.stop();
 		return "<err>";
 	}
 }

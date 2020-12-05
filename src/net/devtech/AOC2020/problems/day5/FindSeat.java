@@ -3,8 +3,6 @@ package net.devtech.AOC2020.problems.day5;
 import static net.devtech.AOC2020.problems.day5.ValidateSeats.getColumn;
 import static net.devtech.AOC2020.problems.day5.ValidateSeats.getRow;
 
-import java.util.Arrays;
-
 import net.devtech.AOC2020.util.Clock;
 import net.devtech.AOC2020.util.Problem;
 
@@ -12,31 +10,25 @@ public class FindSeat implements Problem.StringArray {
 	@Override
 	public String solve(Clock clock, String[] input) {
 		clock.start();
-		int[] data = new int[32];
+		int min = Integer.MAX_VALUE, max = 0;
+		long sum = 0;
 		for (String s : input) {
 			int row = getRow(s);
 			int column = getColumn(s);
 			int seatId = row << 3 | column;
-			data[seatId >> 5] |= 1 << (seatId & 31);
+
+			if(seatId > max) max = seatId;
+			else if(seatId < min) min = seatId;
+			sum += seatId;
 		}
 
-
-		boolean lastFlag = false, lastLastFlag = false;
-		int lastId = 0;
-		for (int i = 0; i < 1024; i++) {
-			int flag = data[i >> 5] & 1 << (i & 31);
-			if(lastLastFlag && !lastFlag && flag != 0) {
-				clock.stop();
-				return Integer.toString(lastId);
-			}
-
-			lastLastFlag = lastFlag;
-
-			lastFlag = flag != 0;
-			lastId = i;
-		}
-
+		long total = sumSeries(min, max) - sum;
 		clock.stop();
-		return "<err>";
+		return Long.toString(total);
+	}
+
+	private static long sumSeries(int min, int max) {
+		int n = (max - min + 1);
+		return (long)n * (min + max) / 2;
 	}
 }

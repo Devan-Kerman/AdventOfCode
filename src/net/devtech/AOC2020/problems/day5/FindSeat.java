@@ -1,7 +1,6 @@
 package net.devtech.AOC2020.problems.day5;
 
-import static net.devtech.AOC2020.problems.day5.ValidateSeats.getColumn;
-import static net.devtech.AOC2020.problems.day5.ValidateSeats.getRow;
+import static net.devtech.AOC2020.problems.day5.ValidateSeats.getId;
 
 import net.devtech.AOC2020.util.Clock;
 import net.devtech.AOC2020.util.Problem;
@@ -13,12 +12,9 @@ public class FindSeat implements Problem.StringArray {
 		int min = Integer.MAX_VALUE, max = 0;
 		long sum = 0;
 		for (String s : input) {
-			int row = getRow(s);
-			int column = getColumn(s);
-			int seatId = row << 3 | column;
-
-			if(seatId > max) max = seatId;
-			else if(seatId < min) min = seatId;
+			int seatId = getId(s);
+			max = Math.max(max, seatId);
+			min = Math.min(min, seatId);
 			sum += seatId;
 		}
 
